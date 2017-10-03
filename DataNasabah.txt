@@ -1,0 +1,6 @@
+AA001, Fikri Firlandi, Male, 25, false, 08573283422, IT Support, 4000000.0, jl cilandak timur los angles
+AC120, Esa Nurdiansyah, Male, 21, false, 08372424562, Programer, 6000000.0, jl cilandak timur los angles
+CA011, Siti Amalia, Female, 20, false, 08342876522, Manager, 4000000.0, jl cilandak timur los angles
+FA001, Nabilah Ramadhan, Female, 20, false, 08573283422, System Analyst, 10000000.0, jl cilandak timur los angles
+AA125, Anggi Aprianto, Male, 30, false, 085773549422, Cheff, 3500000.0, jl cilandak timur los angles
+Kl012, Wilman Saputra, Male, 20, false, 080284659322, Net Sec, 7000000.0, jl cilandak timur los angles
