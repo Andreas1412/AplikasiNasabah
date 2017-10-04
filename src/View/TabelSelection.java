@@ -127,7 +127,6 @@ public class TabelSelection extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         areaAlamat = new javax.swing.JTextArea();
         txtCari = new javax.swing.JTextField();
-        btnCari = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,7 +143,7 @@ public class TabelSelection extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblPerson);
 
         TabPane.setBackground(new java.awt.Color(0, 51, 255));
-        TabPane.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        TabPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 255));
 
@@ -265,7 +264,7 @@ public class TabelSelection extends javax.swing.JFrame {
         });
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informasi Nasabah", 2, 2, new java.awt.Font("Verdana", 1, 12), new java.awt.Color(204, 204, 204))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informasi Nasabah", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Verdana", 1, 12), new java.awt.Color(204, 204, 204))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -402,13 +401,6 @@ public class TabelSelection extends javax.swing.JFrame {
             }
         });
 
-        btnCari.setText("Cari");
-        btnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCariActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -420,14 +412,12 @@ public class TabelSelection extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmbUrut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(TabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -441,8 +431,7 @@ public class TabelSelection extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbUrut, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -473,29 +462,10 @@ public class TabelSelection extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbUrutActionPerformed
 
     private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
-        if (txtCari.getText().equalsIgnoreCase("")) {
-            try {
-                mulai();
-            } catch (IOException ex) {
-                Logger.getLogger(TabelSelection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        TableRowSorter<TableModel> sort = new TableRowSorter<TableModel>((DefaultTableModel)tblPerson.getModel());
+        sort.setRowFilter(RowFilter.regexFilter(txtCari.getText()));
+        tblPerson.setRowSorter(sort);
     }//GEN-LAST:event_txtCariKeyReleased
-
-    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-         CtrNasabah cn = new CtrNasabah();
-        DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
-        String cari = txtCari.getText().toLowerCase().trim();
-        String type = (String) cmbUrut.getSelectedItem();
-        try {
-            cn.Cari(cari, model, type);
-            if(txtCari.getText().equalsIgnoreCase("")){
-                mulai();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(TabelSelection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnCariActionPerformed
 
     /**
      * @param args the command line arguments
@@ -539,7 +509,6 @@ public class TabelSelection extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabPane;
     private javax.swing.JTextArea areaAlamat;
-    private javax.swing.JButton btnCari;
     private javax.swing.JComboBox<String> cmbUrut;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

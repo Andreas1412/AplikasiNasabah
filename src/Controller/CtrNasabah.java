@@ -39,7 +39,7 @@ public class CtrNasabah {
 
     public List<Nasabah> getData() throws FileNotFoundException, IOException {
 
-        File file = new File("H:/DataNasabah.txt");
+        File file = new File("C:/Java_Latihan/DataNasabah.txt");
         FileReader fileReader = new FileReader(file);
         BufferedReader reader = new BufferedReader(fileReader);
 
@@ -78,37 +78,7 @@ public class CtrNasabah {
 
     }
 
-    public void Cari(String cari, DefaultTableModel tbl, String type) throws IOException {
-
-        JTable table = new JTable(tbl);
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.setRowCount(0);
-        List<Nasabah> people = getData();
-        if (type.equalsIgnoreCase("Nama")) {
-            for (Nasabah nas : people) {
-                if (cari.equalsIgnoreCase(nas.getName())) {
-                    Object[] row = new Object[4];
-                    row[0] = nas.getId();
-                    row[1] = nas.getName();
-                    row[2] = nas.getPekerjaan();
-                    row[3] = nas.getTelp();
-                    model.addRow(row);
-                }
-            }
-        } else if (type.equalsIgnoreCase("ID")) {
-            for (Nasabah nas : people) {
-                if (cari.equalsIgnoreCase(nas.getId())) {
-                    Object[] row = new Object[4];
-                    row[0] = nas.getId();
-                    row[1] = nas.getName();
-                    row[2] = nas.getPekerjaan();
-                    row[3] = nas.getTelp();
-                    model.addRow(row);
-                }
-            }
-        }
-    }
-
+    
     /**
      * @return the pelanggan
      */
